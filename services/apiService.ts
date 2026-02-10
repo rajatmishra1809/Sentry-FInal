@@ -1,7 +1,6 @@
 import { GoogleGenAI, Type } from "@google/genai";
 import { SearchResult, IntelligenceReport, UserProfile } from '../types';
 
-// Initialize AI lazily or with a check to avoid crash on import if key is missing during build
 const getAI = () => {
   const apiKey = process.env.API_KEY;
   if (!apiKey) {
@@ -57,22 +56,25 @@ export const fetchCityImages = async (city: string): Promise<string[]> => {
     }
 
     if (pages[pageId].images) {
-      const imageTitles = pages[pageId].images.slice(0, 5).map((img: any) => img.title);
-      for (const title of imageTitles) {
-        if (title.toLowerCase().endsWith('.jpg') || title.toLowerCase().endsWith('.png')) {
-          const imgRes = await fetch(`https://en.wikipedia.org/w/api.php?action=query&titles=${encodeURIComponent(title)}&prop=imageinfo&iiprop=url&format=json&origin=*`);
-          const imgData = await imgRes.json();
-          const p = imgData.query.pages;
-          const id = Object.keys(p)[0];
-          if (p[id].imageinfo?.[0]?.url) {
-            urls.push(p[id].imageinfo[0].url);
-          }
-        }
-        if (urls.length >= 4) break;
-      }
+      const imageTitles = pages[pageId].images
+        .filter((img: any) => img.title.toLowerCase().endsWith('.jpg') || img.title.toLowerCase().endsWith('.png'))
+        .slice(0, 6)
+        .map((img: any) => img.title);
+
+      // Fetch all image URLs in parallel for maximum speed
+      const imageMetadataPromises = imageTitles.map(async (title: string) => {
+        const res = await fetch(`https://en.wikipedia.org/w/api.php?action=query&titles=${encodeURIComponent(title)}&prop=imageinfo&iiprop=url&format=json&origin=*`);
+        const imgData = await res.json();
+        const p = imgData.query.pages;
+        const id = Object.keys(p)[0];
+        return p[id].imageinfo?.[0]?.url;
+      });
+
+      const resolvedUrls = await Promise.all(imageMetadataPromises);
+      resolvedUrls.forEach(url => { if (url) urls.push(url); });
     }
     
-    return urls.filter((url, index) => urls.indexOf(url) === index);
+    return [...new Set(urls)].slice(0, 5);
   } catch (error) {
     console.error('Image fetch error', error);
     return [];
@@ -81,21 +83,11 @@ export const fetchCityImages = async (city: string): Promise<string[]> => {
 
 export const generateIntelligenceWithAI = async (city: string, country: string, temp: number, userProfile: UserProfile): Promise<IntelligenceReport> => {
   const ai = getAI();
-  if (!ai) {
-    throw new Error("AI Service not initialized - Missing API Key");
-  }
+  if (!ai) throw new Error("AI Service not initialized");
 
   try {
-    const prompt = `Generate a high-level travel intelligence dossier for ${city}, ${country}. 
-    Current Temperature: ${temp}°C. 
-    User Profile: ${userProfile.gender}, Religion: ${userProfile.religion}.
-    
-    Provide:
-    1. Realistic safety scores (0-100).
-    2. Cultural engagement protocols and SPECIFIC local traditions (e.g., if Lucknow, mention 'Tehzeeb' and 'Aap' culture; if Varanasi, mention 'Har Har Mahadev' greeting).
-    3. Local traditions, linguistic nuances, and typical greetings unique to this area.
-    4. 3-4 Must-visit high-priority tourist spots (landmarks).
-    5. Specific advisories based on the user's profile.`;
+    const prompt = `Travel intel for ${city}, ${country} (${temp}°C). User: ${userProfile.gender}, ${userProfile.religion}. 
+    Provide safety scores, local traditions/greetings (BE SPECIFIC), etiquette, clothing, food, and 3 landmarks. Return compact JSON.`;
 
     const response = await ai.models.generateContent({
       model: "gemini-3-flash-preview",
@@ -117,7 +109,7 @@ export const generateIntelligenceWithAI = async (city: string, country: string, 
               }
             },
             etiquette: { type: Type.ARRAY, items: { type: Type.STRING } },
-            traditions: { type: Type.ARRAY, items: { type: Type.STRING }, description: "Specific local traditions, greetings, and linguistic nuances." },
+            traditions: { type: Type.ARRAY, items: { type: Type.STRING } },
             clothing: { type: Type.STRING },
             food: { type: Type.ARRAY, items: { type: Type.STRING } },
             warnings: { type: Type.ARRAY, items: { type: Type.STRING } },
@@ -141,18 +133,15 @@ export const generateIntelligenceWithAI = async (city: string, country: string, 
 
     return JSON.parse(response.text);
   } catch (error) {
-    console.error("Gemini failed, using fallback", error);
     return {
-      summary: "Intelligence gathered via secondary channels.",
-      safety: { political: 70, crime: 80, health: 90, disaster: 95, lgbtq: 70 },
-      etiquette: ["Maintain general respect", "Observe local customs"],
-      traditions: ["Greet with respect", "Follow local linguistic cues"],
-      clothing: "Standard travel attire",
-      food: ["Local delicacies"],
-      warnings: ["Always maintain situational awareness."],
-      nearbySpots: [
-        { name: "City Center", description: "The historical heart of the district.", type: "Landmark" }
-      ]
+      summary: "Backup intel loaded.",
+      safety: { political: 80, crime: 80, health: 80, disaster: 90, lgbtq: 80 },
+      etiquette: ["Respect local customs"],
+      traditions: ["Friendly greetings"],
+      clothing: "Casual/Respectful",
+      food: ["Local cuisine"],
+      warnings: ["Situational awareness advised"],
+      nearbySpots: [{ name: "City Center", description: "Historic area", type: "Landmark" }]
     };
   }
 };

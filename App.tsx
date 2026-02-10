@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { UserProfile, CityData, SearchResult } from './types';
 import Onboarding from './components/Onboarding';
@@ -22,7 +21,7 @@ const LoadingScreen: React.FC<{ cityName: string }> = ({ cityName }) => {
   useEffect(() => {
     const interval = setInterval(() => {
       setStep((prev) => (prev < steps.length - 1 ? prev + 1 : prev));
-    }, 1200);
+    }, 800); // Faster loading steps
     return () => clearInterval(interval);
   }, []);
 
@@ -53,7 +52,7 @@ const LoadingScreen: React.FC<{ cityName: string }> = ({ cityName }) => {
         
         <div className="h-1 w-full bg-white/5 rounded-full overflow-hidden border border-white/5">
           <div 
-            className="h-full bg-blue-500 transition-all duration-1000 ease-out shadow-[0_0_20px_rgba(59,130,246,0.8)]" 
+            className="h-full bg-blue-500 transition-all duration-700 ease-out shadow-[0_0_20px_rgba(59,130,246,0.8)]" 
             style={{ width: `${((step + 1) / steps.length) * 100}%` }} 
           />
         </div>
@@ -92,14 +91,20 @@ const App: React.FC = () => {
     const cityName = res.address.city || res.address.town || res.display_name.split(',')[0];
     setLoadingCity(cityName);
     setLoading(true);
+    
     try {
       const lat = parseFloat(res.lat);
       const lon = parseFloat(res.lon);
-      const temp = await fetchWeather(lat, lon);
-      const summary = await fetchWikipediaSummary(cityName);
-      const imageUrls = await fetchCityImages(cityName);
-      
       const country = res.address.country;
+
+      // PARALLEL FETCHING: Trigger independent API calls at once
+      const [temp, summary, imageUrls] = await Promise.all([
+        fetchWeather(lat, lon),
+        fetchWikipediaSummary(cityName),
+        fetchCityImages(cityName)
+      ]);
+      
+      // AI depends on temp, so it follows the parallel block
       const intel = await generateIntelligenceWithAI(cityName, country, temp, profile);
       
       const cityData: CityData = {
@@ -110,7 +115,7 @@ const App: React.FC = () => {
         temp,
         description: summary,
         imageUrls,
-        compatibilityScore: Math.floor(Math.random() * 20) + 75 - (intel.warnings.length * 10),
+        compatibilityScore: Math.floor(Math.random() * 20) + 75 - (intel.warnings.length * 5),
         intelligence: intel
       };
       

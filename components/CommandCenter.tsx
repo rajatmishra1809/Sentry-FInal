@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { Search, MapPin, X } from 'lucide-react';
 import { fetchLocation } from '../services/apiService';
@@ -28,6 +27,7 @@ const CommandCenter: React.FC<CommandCenterProps> = ({ onSelect }) => {
   }, []);
 
   useEffect(() => {
+    // Reduced debounce from 400ms to 250ms for faster feedback
     const timeout = setTimeout(async () => {
       if (query.length > 2) {
         const data = await fetchLocation(query);
@@ -35,7 +35,7 @@ const CommandCenter: React.FC<CommandCenterProps> = ({ onSelect }) => {
       } else {
         setResults([]);
       }
-    }, 400);
+    }, 250);
     return () => clearTimeout(timeout);
   }, [query]);
 
