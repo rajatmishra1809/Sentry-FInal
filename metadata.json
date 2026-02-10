@@ -1,0 +1,5 @@
+{
+  "name": "SENTRY Intelligence Dashboard",
+  "description": "A high-end, bento-grid travel intelligence dashboard featuring real-time weather, geocoding, and cultural compatibility analysis.",
+  "requestFramePermissions": []
+}
