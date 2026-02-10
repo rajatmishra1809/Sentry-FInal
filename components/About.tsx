@@ -1,13 +1,17 @@
-
 import React from 'react';
-import { Shield, Zap, Globe, Target, Cpu, Eye } from 'lucide-react';
+import { Shield, Zap, Globe, Target, Cpu, Eye, Github, Instagram, UserCircle2 } from 'lucide-react';
 
 const About: React.FC = () => {
   return (
     <div className="h-full w-full overflow-y-auto pb-40 px-6 pt-10 scrollbar-hide">
-      <div className="max-w-5xl mx-auto space-y-10 animate-fade-in">
+      <div className="max-w-5xl mx-auto space-y-16 animate-fade-in">
         {/* Hero Section */}
         <div className="text-center space-y-4">
+          <div className="flex justify-center mb-6">
+            <div className="w-20 h-20 bg-blue-500/10 border border-blue-500/20 rounded-3xl flex items-center justify-center shadow-[0_0_50px_rgba(59,130,246,0.2)]">
+              <Shield className="w-10 h-10 text-blue-500" />
+            </div>
+          </div>
           <h2 className="text-xs font-black uppercase tracking-[0.6em] text-blue-500">System Protocol: About</h2>
           <h1 className="text-6xl md:text-8xl font-syne font-bold tracking-tighter text-white">SENTRY</h1>
           <p className="text-white/40 max-w-xl mx-auto text-sm leading-relaxed tracking-wide">
@@ -15,8 +19,75 @@ const About: React.FC = () => {
           </p>
         </div>
 
+        {/* Personnel Registry Section */}
+        <div className="space-y-8">
+          <div className="flex items-center space-x-4 px-4">
+            <UserCircle2 className="w-5 h-5 text-blue-500" />
+            <h3 className="text-[10px] font-black uppercase tracking-[0.5em] text-white/40">Personnel Registry</h3>
+            <div className="h-px flex-1 bg-gradient-to-r from-white/10 to-transparent" />
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Rajat Mishra Card */}
+            <div className="glass p-8 rounded-[40px] border-white/10 hover:border-blue-500/30 transition-all group relative overflow-hidden">
+              <div className="absolute top-0 right-0 p-6 opacity-[0.03] group-hover:opacity-[0.07] transition-opacity">
+                <Cpu className="w-24 h-24" />
+              </div>
+              <div className="relative z-10">
+                <p className="text-blue-500 text-[10px] font-black uppercase tracking-widest mb-2">Lead Architect & Engineer</p>
+                <h4 className="text-3xl font-syne font-bold text-white mb-6">Rajat Mishra</h4>
+                <p className="text-white/40 text-sm leading-relaxed mb-8">
+                  Responsible for the technical architecture, core intelligence engine, and the visual interface of the SENTRY platform.
+                </p>
+                <div className="flex items-center space-x-4">
+                  <a 
+                    href="https://github.com/rajatmishra1809" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="p-3 bg-white/5 hover:bg-white text-white hover:text-black rounded-2xl transition-all"
+                  >
+                    <Github className="w-5 h-5" />
+                  </a>
+                  <a 
+                    href="https://www.instagram.com/18rajatmishra/" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="p-3 bg-white/5 hover:bg-white text-white hover:text-black rounded-2xl transition-all"
+                  >
+                    <Instagram className="w-5 h-5" />
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            {/* Arav Bansal Card */}
+            <div className="glass p-8 rounded-[40px] border-white/10 hover:border-purple-500/30 transition-all group relative overflow-hidden">
+              <div className="absolute top-0 right-0 p-6 opacity-[0.03] group-hover:opacity-[0.07] transition-opacity">
+                <Zap className="w-24 h-24" />
+              </div>
+              <div className="relative z-10">
+                <p className="text-purple-400 text-[10px] font-black uppercase tracking-widest mb-2">Conceptual Strategist</p>
+                <h4 className="text-3xl font-syne font-bold text-white mb-6">Arav Bansal</h4>
+                <p className="text-white/40 text-sm leading-relaxed mb-8">
+                  Pioneered the core conceptual framework and mission vision that defines the SENTRY intelligence directive.
+                </p>
+                <div className="flex items-center space-x-4">
+                  <a 
+                    href="https://www.instagram.com/arav_bansal174/" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="p-3 bg-white/5 hover:bg-white text-white hover:text-black rounded-2xl transition-all"
+                  >
+                    <Instagram className="w-5 h-5" />
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         {/* Bento Mission Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-10">
           <div className="md:col-span-2 glass p-10 rounded-[40px] border-white/10 hover:border-blue-500/30 transition-all group">
             <Globe className="w-10 h-10 text-blue-500 mb-6 group-hover:scale-110 transition-transform" />
             <h3 className="text-2xl font-syne font-bold mb-4">Global Network</h3>

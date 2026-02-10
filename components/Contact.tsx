@@ -1,6 +1,5 @@
-
 import React, { useState } from 'react';
-import { Send, CheckCircle2, AlertTriangle, Mail, MessageSquare } from 'lucide-react';
+import { Send, CheckCircle2, AlertTriangle, Mail, Instagram, Github } from 'lucide-react';
 
 const Contact: React.FC = () => {
   const [status, setStatus] = useState<'IDLE' | 'SENDING' | 'SUCCESS' | 'ERROR'>('IDLE');
@@ -118,15 +117,23 @@ const Contact: React.FC = () => {
               )}
             </button>
             
-            <div className="flex justify-center space-x-8 pt-4">
-               <div className="flex items-center space-x-2 text-[10px] text-white/20 uppercase font-bold tracking-widest">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-6">
+              <a href="mailto:rajatmishra1809@gmail.com" className="flex items-center space-x-2 text-[8px] text-white/20 uppercase font-bold tracking-widest hover:text-white transition-colors">
                   <Mail className="w-3 h-3" />
-                  <span>Direct: intel@sentry.io</span>
-               </div>
-               <div className="flex items-center space-x-2 text-[10px] text-white/20 uppercase font-bold tracking-widest">
-                  <MessageSquare className="w-3 h-3" />
-                  <span>Signal: @sentry_ops</span>
-               </div>
+                  <span>Email Agent</span>
+              </a>
+              <a href="https://github.com/rajatmishra1809" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-2 text-[8px] text-white/20 uppercase font-bold tracking-widest hover:text-white transition-colors">
+                  <Github className="w-3 h-3" />
+                  <span>GitHub Registry</span>
+              </a>
+              <a href="https://www.instagram.com/18rajatmishra/" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-2 text-[8px] text-white/20 uppercase font-bold tracking-widest hover:text-white transition-colors">
+                  <Instagram className="w-3 h-3" />
+                  <span>Instagram @18</span>
+              </a>
+              <a href="https://www.instagram.com/arav_bansal174/" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-2 text-[8px] text-white/20 uppercase font-bold tracking-widest hover:text-white transition-colors">
+                  <Instagram className="w-3 h-3" />
+                  <span>Instagram @arav</span>
+              </a>
             </div>
           </form>
         )}
