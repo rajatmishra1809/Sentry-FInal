@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,9 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
   <style>
-    :root {
-      --bg-void: #050505;
-    }
+    :root { --bg-void: #050505; }
     body {
       font-family: 'Inter', sans-serif;
       background-color: var(--bg-void);
@@ -24,25 +21,15 @@
     }
     .font-heading { font-family: 'Space Grotesk', sans-serif; }
     .font-syne { font-family: 'Syne', sans-serif; }
-    
-    ::-webkit-scrollbar {
-      width: 4px;
-    }
-    ::-webkit-scrollbar-track {
-      background: transparent;
-    }
-    ::-webkit-scrollbar-thumb {
-      background: #ffffff20;
-      border-radius: 10px;
-    }
-    
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: #ffffff20; border-radius: 10px; }
     .glass {
       background: rgba(255, 255, 255, 0.03);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       border: 1px solid rgba(255, 255, 255, 0.1);
     }
-    
     .bento-card {
       background: rgba(255, 255, 255, 0.02);
       border: 1px solid rgba(255, 255, 255, 0.08);
@@ -54,23 +41,11 @@
       border-color: rgba(255, 255, 255, 0.15);
       transform: translateY(-2px);
     }
-    
-    .leaflet-container {
-      background: #050505 !important;
-      height: 100% !important;
-      width: 100% !important;
-    }
-    .leaflet-tile-pane {
-      filter: brightness(0.6) invert(1) contrast(3) hue-rotate(200deg) saturate(0.3) brightness(0.7);
-    }
-    
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
     }
-    .animate-fade-in {
-      animation: fadeIn 0.5s ease forwards;
-    }
+    .animate-fade-in { animation: fadeIn 0.5s ease forwards; }
   </style>
 <script type="importmap">
 {
@@ -78,15 +53,16 @@
     "react": "https://esm.sh/react@^19.2.4",
     "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
     "react/": "https://esm.sh/react@^19.2.4/",
-    "leaflet": "https://esm.sh/leaflet@^1.9.4",
+    "@google/genai": "https://esm.sh/@google/genai@^1.40.0",
     "lucide-react": "https://esm.sh/lucide-react@^0.563.0",
-    "react-leaflet": "https://esm.sh/react-leaflet@^5.0.0",
-    "@google/genai": "https://esm.sh/@google/genai@^1.40.0"
+    "vite": "https://esm.sh/vite@^7.3.1",
+    "@vitejs/plugin-react": "https://esm.sh/@vitejs/plugin-react@^5.1.4"
   }
 }
 </script>
 </head>
 <body>
   <div id="root"></div>
+  <script type="module" src="./index.tsx"></script>
 </body>
 </html>

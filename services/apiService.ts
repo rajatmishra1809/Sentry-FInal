@@ -1,8 +1,15 @@
-
 import { GoogleGenAI, Type } from "@google/genai";
 import { SearchResult, IntelligenceReport, UserProfile } from '../types';
 
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+// Initialize AI lazily or with a check to avoid crash on import if key is missing during build
+const getAI = () => {
+  const apiKey = process.env.API_KEY;
+  if (!apiKey) {
+    console.warn("API_KEY is missing. AI features will not work.");
+    return null;
+  }
+  return new GoogleGenAI({ apiKey });
+};
 
 export const fetchLocation = async (query: string): Promise<SearchResult[]> => {
   try {
@@ -73,6 +80,11 @@ export const fetchCityImages = async (city: string): Promise<string[]> => {
 };
 
 export const generateIntelligenceWithAI = async (city: string, country: string, temp: number, userProfile: UserProfile): Promise<IntelligenceReport> => {
+  const ai = getAI();
+  if (!ai) {
+    throw new Error("AI Service not initialized - Missing API Key");
+  }
+
   try {
     const prompt = `Generate a high-level travel intelligence dossier for ${city}, ${country}. 
     Current Temperature: ${temp}°C. 
