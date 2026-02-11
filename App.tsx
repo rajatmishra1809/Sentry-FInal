@@ -138,7 +138,7 @@ const App: React.FC = () => {
 
       <CommandCenter onSelect={handleSelectCity} />
 
-      <main className="flex-1 w-full relative overflow-hidden mt-20">
+      <main className="flex-1 w-full relative overflow-hidden mt-24">
         <div className={`h-full w-full absolute inset-0 transition-all duration-700 ease-in-out transform ${activeTab === 'dash' ? 'opacity-100 translate-y-0 scale-100 z-10' : 'opacity-0 translate-y-10 scale-95 z-0 pointer-events-none'}`}>
           <BentoGrid city={selectedCity} user={profile} />
         </div>

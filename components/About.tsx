@@ -28,7 +28,7 @@ const About: React.FC = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* Developer Card */}
+            {/* Developer Card - Updated to 1st Person */}
             <div className="glass p-8 rounded-[40px] border-white/10 hover:border-blue-500/30 transition-all group relative overflow-hidden">
               <div className="absolute top-0 right-0 p-6 opacity-[0.03] group-hover:opacity-[0.07] transition-opacity">
                 <Cpu className="w-24 h-24" />
@@ -37,7 +37,7 @@ const About: React.FC = () => {
                 <p className="text-blue-500 text-[10px] font-black uppercase tracking-widest mb-2">Engineering & Design</p>
                 <h4 className="text-3xl font-syne font-bold text-white mb-6">Rajat Mishra</h4>
                 <p className="text-white/40 text-sm leading-relaxed mb-8">
-                  The mind behind the tech. Rajat built the engine and designed this interface to make travel research as smooth as possible.
+                  I'm the developer behind the code. I engineered the core engine and designed this interface to make your travel research as smooth, fast, and intuitive as possible.
                 </p>
                 <div className="flex items-center space-x-4">
                   <a 
