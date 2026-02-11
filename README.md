@@ -114,5 +114,39 @@ Blueprint-style grayscale interface that transitions into full color on interact
 ---
 
 ## ✦ Intelligence Flow
+User Search
+↓
+Geocoding Resolution
+↓
+Weather Intelligence Fetch
+↓
+Cultural Data Aggregation
+↓
+Gemini AI Processing
+↓
+Structured Intelligence Report
+↓
+Rendered in Intelligence Dashboard
+
+---
+
+## ✦ Key Characteristics
+
+- Serverless architecture  
+- Real-time intelligence synthesis  
+- Fully responsive interface  
+- Zero backend infrastructure required  
+- Fast, scalable, and efficient  
+
+---
+
+## ✦ Development
+
+```bash
+git clone https://github.com/yourusername/sentry.git
+cd sentry
+npm install
+npm run dev
+
 
 
