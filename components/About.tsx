@@ -3,7 +3,7 @@ import { Shield, Zap, Globe, Target, Cpu, Eye, Github, Instagram, UserCircle2 } 
 
 const About: React.FC = () => {
   return (
-    <div className="h-full w-full overflow-y-auto pb-40 px-6 pt-10 scrollbar-hide">
+    <div className="h-full w-full overflow-y-auto pb-40 px-6 pt-10 smooth-scroll overscroll-behavior-contain">
       <div className="max-w-5xl mx-auto space-y-16 animate-fade-in">
         {/* Hero Section */}
         <div className="text-center space-y-4">
@@ -12,32 +12,32 @@ const About: React.FC = () => {
               <Shield className="w-10 h-10 text-blue-500" />
             </div>
           </div>
-          <h2 className="text-xs font-black uppercase tracking-[0.6em] text-blue-500">System Protocol: About</h2>
+          <h2 className="text-xs font-black uppercase tracking-[0.6em] text-blue-500">Our Story</h2>
           <h1 className="text-6xl md:text-8xl font-syne font-bold tracking-tighter text-white">SENTRY</h1>
           <p className="text-white/40 max-w-xl mx-auto text-sm leading-relaxed tracking-wide">
-            The world's most advanced autonomous travel intelligence node. Designed for high-stakes exploration and cultural synchronization.
+            A premium travel companion designed for modern explorers. Get real-time insights, cultural tips, and safety updates for any destination.
           </p>
         </div>
 
-        {/* Personnel Registry Section */}
+        {/* The Team Section */}
         <div className="space-y-8">
           <div className="flex items-center space-x-4 px-4">
             <UserCircle2 className="w-5 h-5 text-blue-500" />
-            <h3 className="text-[10px] font-black uppercase tracking-[0.5em] text-white/40">Personnel Registry</h3>
+            <h3 className="text-[10px] font-black uppercase tracking-[0.5em] text-white/40">The Creators</h3>
             <div className="h-px flex-1 bg-gradient-to-r from-white/10 to-transparent" />
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* Rajat Mishra Card */}
+            {/* Developer Card */}
             <div className="glass p-8 rounded-[40px] border-white/10 hover:border-blue-500/30 transition-all group relative overflow-hidden">
               <div className="absolute top-0 right-0 p-6 opacity-[0.03] group-hover:opacity-[0.07] transition-opacity">
                 <Cpu className="w-24 h-24" />
               </div>
               <div className="relative z-10">
-                <p className="text-blue-500 text-[10px] font-black uppercase tracking-widest mb-2">Lead Architect & Engineer</p>
+                <p className="text-blue-500 text-[10px] font-black uppercase tracking-widest mb-2">Engineering & Design</p>
                 <h4 className="text-3xl font-syne font-bold text-white mb-6">Rajat Mishra</h4>
                 <p className="text-white/40 text-sm leading-relaxed mb-8">
-                  Responsible for the technical architecture, core intelligence engine, and the visual interface of the SENTRY platform.
+                  The mind behind the tech. Rajat built the engine and designed this interface to make travel research as smooth as possible.
                 </p>
                 <div className="flex items-center space-x-4">
                   <a 
@@ -60,16 +60,16 @@ const About: React.FC = () => {
               </div>
             </div>
 
-            {/* Arav Bansal Card */}
+            {/* Vision Card */}
             <div className="glass p-8 rounded-[40px] border-white/10 hover:border-purple-500/30 transition-all group relative overflow-hidden">
               <div className="absolute top-0 right-0 p-6 opacity-[0.03] group-hover:opacity-[0.07] transition-opacity">
                 <Zap className="w-24 h-24" />
               </div>
               <div className="relative z-10">
-                <p className="text-purple-400 text-[10px] font-black uppercase tracking-widest mb-2">Conceptual Strategist</p>
+                <p className="text-purple-400 text-[10px] font-black uppercase tracking-widest mb-2">Product Vision</p>
                 <h4 className="text-3xl font-syne font-bold text-white mb-6">Arav Bansal</h4>
                 <p className="text-white/40 text-sm leading-relaxed mb-8">
-                  Pioneered the core conceptual framework and mission vision that defines the SENTRY intelligence directive.
+                  Setting the direction. Arav pioneered the core idea, ensuring Sentry offers exactly what a traveler needs to feel confident.
                 </p>
                 <div className="flex items-center space-x-4">
                   <a 
@@ -86,42 +86,42 @@ const About: React.FC = () => {
           </div>
         </div>
 
-        {/* Bento Mission Grid */}
+        {/* Features */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-10">
           <div className="md:col-span-2 glass p-10 rounded-[40px] border-white/10 hover:border-blue-500/30 transition-all group">
             <Globe className="w-10 h-10 text-blue-500 mb-6 group-hover:scale-110 transition-transform" />
-            <h3 className="text-2xl font-syne font-bold mb-4">Global Network</h3>
+            <h3 className="text-2xl font-syne font-bold mb-4">Smart Network</h3>
             <p className="text-white/50 leading-relaxed italic">
-              SENTRY leverages a distributed network of real-time geospatial data, weather telemetry, and historical archives to provide a 360-degree view of any destination on Earth.
+              Sentry connects to real-time maps, weather, and city data to give you an instant, 360-degree view of your next destination.
             </p>
           </div>
           <div className="glass p-10 rounded-[40px] border-white/10 flex flex-col justify-center text-center">
             <Cpu className="w-8 h-8 text-purple-500 mx-auto mb-4 animate-pulse" />
-            <h4 className="text-4xl font-syne font-bold">99.8%</h4>
-            <p className="text-[10px] uppercase font-bold text-white/20 tracking-widest mt-2">Uptime Reliability</p>
+            <h4 className="text-4xl font-syne font-bold">Live</h4>
+            <p className="text-[10px] uppercase font-bold text-white/20 tracking-widest mt-2">Always-on Data Feed</p>
           </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="glass p-10 rounded-[40px] border-white/10 group">
             <Shield className="w-8 h-8 text-red-500 mb-4 group-hover:rotate-12 transition-transform" />
-            <h3 className="text-xl font-syne font-bold mb-2">Security First</h3>
+            <h3 className="text-xl font-syne font-bold mb-2">Safety Focus</h3>
             <p className="text-xs text-white/40 leading-relaxed">
-              Proprietary threat-matrix analysis for every operational sector.
+              We analyze security, health, and local conditions so you don't have to.
             </p>
           </div>
           <div className="glass p-10 rounded-[40px] border-white/10 group">
             <Target className="w-8 h-8 text-emerald-500 mb-4 group-hover:scale-125 transition-all" />
-            <h3 className="text-xl font-syne font-bold mb-2">Precision Data</h3>
+            <h3 className="text-xl font-syne font-bold mb-2">Personalized</h3>
             <p className="text-xs text-white/40 leading-relaxed">
-              Sub-degree accuracy for coordinates and environmental telemetry.
+              Insights tailored specifically to your background and beliefs.
             </p>
           </div>
           <div className="glass p-10 rounded-[40px] border-white/10 group">
             <Eye className="w-8 h-8 text-blue-400 mb-4 group-hover:animate-pulse" />
-            <h3 className="text-xl font-syne font-bold mb-2">Zero Tracking</h3>
+            <h3 className="text-xl font-syne font-bold mb-2">Privacy</h3>
             <p className="text-xs text-white/40 leading-relaxed">
-              Your mission profile remains local. We prioritize privacy above all.
+              We keep it local. Your searches and profile stay on your device.
             </p>
           </div>
         </div>

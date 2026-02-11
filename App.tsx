@@ -7,21 +7,21 @@ import IntelBriefing from './components/IntelBriefing';
 import About from './components/About';
 import Contact from './components/Contact';
 import { fetchWeather, fetchWikipediaSummary, generateIntelligenceWithAI, fetchCityImages } from './services/apiService';
-import { Home, Compass, User, Info, Send, Shield, Activity } from 'lucide-react';
+import { Home, Compass, User, Info, Send, Shield, Activity, Globe } from 'lucide-react';
 
 const LoadingScreen: React.FC<{ cityName: string }> = ({ cityName }) => {
   const [step, setStep] = useState(0);
   const steps = [
-    "Establishing Secure Uplink...",
-    "Retrieving Geospatial Telemetry...",
-    "Analyzing Cultural Compatibility...",
-    "Finalizing Intelligence Dossier..."
+    "Searching the globe...",
+    "Finding the best spots...",
+    "Personalizing your guide...",
+    "Finalizing your trip insights..."
   ];
 
   useEffect(() => {
     const interval = setInterval(() => {
       setStep((prev) => (prev < steps.length - 1 ? prev + 1 : prev));
-    }, 800); // Faster loading steps
+    }, 800);
     return () => clearInterval(interval);
   }, []);
 
@@ -36,7 +36,7 @@ const LoadingScreen: React.FC<{ cityName: string }> = ({ cityName }) => {
         <div className="w-32 h-32 border border-blue-500/20 rounded-full animate-[ping_3s_infinite]" />
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="w-16 h-16 bg-blue-500/10 border border-blue-500/30 rounded-2xl flex items-center justify-center shadow-[0_0_30px_rgba(59,130,246,0.2)]">
-            <Activity className="w-8 h-8 text-blue-500 animate-pulse" />
+            <Globe className="w-8 h-8 text-blue-500 animate-pulse" />
           </div>
         </div>
       </div>
@@ -58,9 +58,8 @@ const LoadingScreen: React.FC<{ cityName: string }> = ({ cityName }) => {
         </div>
         
         <div className="flex flex-col items-center space-y-1 opacity-20">
-          <Shield className="w-4 h-4 text-white" />
           <p className="text-white text-[9px] font-black uppercase tracking-[0.5em]">
-            Encrypted Analysis Sequence
+            Curating Personal Travel Insights
           </p>
         </div>
       </div>
@@ -97,14 +96,12 @@ const App: React.FC = () => {
       const lon = parseFloat(res.lon);
       const country = res.address.country;
 
-      // PARALLEL FETCHING: Trigger independent API calls at once
       const [temp, summary, imageUrls] = await Promise.all([
         fetchWeather(lat, lon),
         fetchWikipediaSummary(cityName),
         fetchCityImages(cityName)
       ]);
       
-      // AI depends on temp, so it follows the parallel block
       const intel = await generateIntelligenceWithAI(cityName, country, temp, profile);
       
       const cityData: CityData = {
@@ -161,7 +158,6 @@ const App: React.FC = () => {
         data={selectedCity} 
       />
 
-      {/* Modern Floating Dock */}
       <div className="fixed bottom-12 left-1/2 -translate-x-1/2 z-[500] flex items-center p-2 glass rounded-[40px] shadow-[0_30px_60px_rgba(0,0,0,0.8)] border border-white/10 backdrop-blur-[50px]">
         <button 
           onClick={() => setActiveTab('dash')}
@@ -188,7 +184,7 @@ const App: React.FC = () => {
         <button 
           onClick={() => selectedCity && setIsBriefingOpen(true)}
           className={`p-4 rounded-full hover:bg-white/10 text-white/40 transition-all active:scale-90 ${!selectedCity && 'opacity-20 cursor-not-allowed'}`}
-          title="Intelligence Briefing"
+          title="Guide"
         >
           <Compass className="w-5 h-5" />
         </button>
@@ -203,11 +199,11 @@ const App: React.FC = () => {
 
       <div className="h-10 px-10 flex justify-between items-center bg-[#050505] border-t border-white/5 text-[9px] font-bold text-white/20 uppercase tracking-[0.4em] z-40">
         <div className="flex items-center space-x-8">
-          <span className="flex items-center"><span className="w-1.5 h-1.5 bg-blue-500 rounded-full mr-3 animate-pulse" /> SYSTEM NOMINAL</span>
-          <span className="hidden lg:inline text-white/10 font-mono">CHANNEL: SECURE</span>
+          <span className="flex items-center"><span className="w-1.5 h-1.5 bg-blue-500 rounded-full mr-3 animate-pulse" /> SYSTEM READY</span>
+          <span className="hidden lg:inline text-white/10 font-mono">ENCRYPTED DATA FEED</span>
         </div>
         <div className="hidden sm:block text-white/20 uppercase tracking-[0.2em]">
-          SENTRY INTELLIGENCE // v3.1.0
+          SENTRY TRAVEL // v3.1.0
         </div>
       </div>
       
