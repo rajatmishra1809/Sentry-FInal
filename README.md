@@ -143,7 +143,7 @@ Rendered in Intelligence Dashboard
 ## ✦ Development
 
 ```bash
-git clone https://github.com/yourusername/sentry.git
+git clone https://github.com/rajatmishra1809/Sentry-FInal.git
 cd sentry
 npm install
 npm run dev
