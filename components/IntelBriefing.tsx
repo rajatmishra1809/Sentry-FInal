@@ -1,5 +1,6 @@
+
 import React, { useState } from 'react';
-import { X, ShieldAlert, Thermometer, Compass, Zap, MapPin, CheckCircle2, Camera, Navigation, Heart, Languages, Landmark } from 'lucide-react';
+import { X, ShieldAlert, Thermometer, Compass, Zap, MapPin, CheckCircle2, Camera, Navigation, Heart, Languages, Landmark, Star } from 'lucide-react';
 import { CityData } from '../types';
 
 interface IntelBriefingProps {
@@ -37,7 +38,7 @@ const IntelBriefing: React.FC<IntelBriefingProps> = ({ data, isOpen, onClose }) 
             </div>
             <div>
               <div className="flex items-center space-x-3 text-blue-500 mb-0.5">
-                 <span className="text-[10px] font-black uppercase tracking-[0.5em]">Destination Guide</span>
+                 <span className="text-[10px] font-bold uppercase tracking-[0.3em]">Field Report // Active</span>
               </div>
               <h2 className="text-2xl md:text-3xl font-syne font-bold tracking-tighter text-white uppercase">{data.name}</h2>
             </div>
@@ -70,6 +71,7 @@ const IntelBriefing: React.FC<IntelBriefingProps> = ({ data, isOpen, onClose }) 
               </div>
             </div>
 
+            {/* Quick Stats Grid */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <div className="bento-card p-8 flex items-center space-x-6 border-blue-500/10">
                 <div className="p-5 bg-orange-500/10 rounded-2xl"><Thermometer className="text-orange-400 w-8 h-8" /></div>
@@ -94,6 +96,56 @@ const IntelBriefing: React.FC<IntelBriefingProps> = ({ data, isOpen, onClose }) 
               </div>
             </div>
 
+            {/* Local Tips & Cultural Protocols */}
+            <div className="space-y-12">
+              <div className="flex items-center space-x-4 px-2">
+                <Languages className="w-5 h-5 text-blue-500" />
+                <h3 className="font-syne font-bold uppercase tracking-[0.4em] text-base">Local Tips & Cultural Greeting</h3>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="p-10 bento-card border-blue-500/10 flex flex-col justify-center space-y-6">
+                  <div>
+                    <p className="text-[9px] font-black text-blue-500/40 uppercase tracking-widest mb-2">Cultural Salutation</p>
+                    <p className="text-5xl font-semibold text-white tracking-tight" style={{ fontFamily: "'Inter', sans-serif" }}>
+                      {data.intelligence.greeting}
+                    </p>
+                  </div>
+                  <div className="pt-6 border-t border-white/5">
+                    <p className="text-white/60 text-sm leading-relaxed italic">
+                      "Usage: {data.intelligence.etiquette.find(e => e.toLowerCase().includes('greet') || e.toLowerCase().includes('nod')) || 'Use this greeting to show respect to locals upon meeting.'}"
+                    </p>
+                  </div>
+                </div>
+                <div className="p-10 bento-card border-emerald-500/10 space-y-6">
+                  <p className="text-[9px] font-black text-emerald-500/40 uppercase tracking-widest mb-2">Engagement Protocol</p>
+                  <ul className="space-y-4">
+                    {data.intelligence.etiquette.slice(0, 3).map((e, i) => (
+                      <li key={i} className="flex items-start space-x-4">
+                        <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
+                        <span className="text-white/80 text-sm font-medium leading-relaxed">{e}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            {/* Inclusivity Section: Major Festivals */}
+            <div className="space-y-12">
+              <div className="flex items-center space-x-4 px-2">
+                <Star className="w-5 h-5 text-purple-500" />
+                <h3 className="font-syne font-bold uppercase tracking-[0.4em] text-base">Key Regional Traditions</h3>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                 {data.intelligence.traditions.map((t, i) => (
+                   <div key={i} className="p-8 glass rounded-[32px] border-white/5 flex items-start space-x-5">
+                      <div className="w-2 h-2 rounded-full bg-purple-500 mt-2 shrink-0 shadow-[0_0_10px_rgba(168,85,247,1)]" />
+                      <p className="text-white/70 text-base font-medium leading-relaxed">{t}</p>
+                   </div>
+                 ))}
+              </div>
+            </div>
+
             <div className="space-y-12">
                <div className="flex items-center space-x-4 px-2">
                   <Navigation className="w-5 h-5 text-emerald-500" />
@@ -114,20 +166,20 @@ const IntelBriefing: React.FC<IntelBriefingProps> = ({ data, isOpen, onClose }) 
               <div className="space-y-12">
                 <div className="flex items-center space-x-4 px-2">
                   <ShieldAlert className="w-5 h-5 text-red-500" />
-                  <h3 className="font-syne font-bold uppercase tracking-[0.4em] text-base">Safety Overview</h3>
+                  <h3 className="font-syne font-bold uppercase tracking-[0.4em] text-base">Sentry Safety Overview</h3>
                 </div>
                 <div className="grid gap-2">
-                  <ProgressBar label="Political Environment" value={data.intelligence.safety.political} color="bg-blue-500" />
-                  <ProgressBar label="General Security" value={data.intelligence.safety.crime} color="bg-emerald-500" />
-                  <ProgressBar label="Health Services" value={data.intelligence.safety.health} color="bg-cyan-500" />
-                  <ProgressBar label="Natural Conditions" value={data.intelligence.safety.disaster} color="bg-orange-500" />
+                  <ProgressBar label="Political Stability" value={data.intelligence.safety.political} color="bg-blue-500" />
+                  <ProgressBar label="Crime Incidence" value={data.intelligence.safety.crime} color="bg-emerald-500" />
+                  <ProgressBar label="Public Health" value={data.intelligence.safety.health} color="bg-cyan-500" />
+                  <ProgressBar label="Natural Resilience" value={data.intelligence.safety.disaster} color="bg-orange-500" />
                 </div>
               </div>
 
               <div className="space-y-12">
                 <div className="flex items-center space-x-4 px-2">
                   <Zap className="w-5 h-5 text-yellow-500" />
-                  <h3 className="font-syne font-bold uppercase tracking-[0.4em] text-base">Local Tips</h3>
+                  <h3 className="font-syne font-bold uppercase tracking-[0.4em] text-base">Field Precautions</h3>
                 </div>
                 {data.intelligence.warnings.length > 0 ? (
                   <div className="grid gap-6">

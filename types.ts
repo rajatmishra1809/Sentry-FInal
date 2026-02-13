@@ -19,6 +19,7 @@ export interface CityData {
 
 export interface IntelligenceReport {
   summary: string;
+  greeting: string;
   safety: {
     political: number;
     crime: number;

@@ -23,9 +23,9 @@ const BentoGrid: React.FC<BentoGridProps> = ({ city, user }) => {
   }, [city]);
 
   return (
-    <div className="h-full w-full overflow-y-auto smooth-scroll overscroll-behavior-contain">
-      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 auto-rows-[160px] p-4 pb-48 max-w-[1600px] mx-auto">
-        {/* Destination Header */}
+    <div className="h-full w-full overflow-y-auto smooth-scroll overscroll-behavior-contain pb-32">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 auto-rows-[160px] p-4 pb-20 max-w-[1600px] mx-auto">
+        {/* Destination Header - Rows 1-2, Cols 1-2 */}
         <div className="col-span-1 md:col-span-2 row-span-2 bento-card p-10 md:p-12 flex flex-col justify-between group overflow-hidden relative border-blue-500/20 shadow-[0_0_50px_rgba(59,130,246,0.05)]">
           <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-br from-blue-500/[0.05] to-transparent pointer-events-none" />
           <div className="relative z-10">
@@ -35,12 +35,14 @@ const BentoGrid: React.FC<BentoGridProps> = ({ city, user }) => {
                 {city ? 'Live Destination' : 'SENTRY // ONLINE'}
               </span>
             </div>
-            <h1 className="text-5xl md:text-7xl font-syne font-bold leading-none tracking-tighter mb-6">
-              {city ? city.name : 'WHERE TO?'}
-            </h1>
-            <div className="flex items-center text-white/40 text-xs font-bold uppercase tracking-[0.3em]">
+            <div className="space-y-1">
+              <h1 className="text-5xl md:text-7xl font-syne font-bold leading-none tracking-tighter mb-6 truncate max-w-full">
+                {city ? city.name : 'WHERE TO?'}
+              </h1>
+            </div>
+            <div className="flex items-center text-white/40 text-xs font-bold uppercase tracking-[0.3em] truncate">
               {city ? (
-                <><MapPin className="w-4 h-4 mr-2 text-blue-500" /> {city.country}</>
+                <><MapPin className="w-4 h-4 mr-2 text-blue-500 shrink-0" /> {city.country}</>
               ) : 'SEARCH A CITY TO GET STARTED'}
             </div>
           </div>
@@ -60,7 +62,7 @@ const BentoGrid: React.FC<BentoGridProps> = ({ city, user }) => {
           </div>
         </div>
 
-        {/* Gallery */}
+        {/* Gallery - Rows 1-2, Col 3 */}
         <div className="col-span-1 md:col-span-1 row-span-2 bento-card overflow-hidden relative group border-white/5 blueprint-grid image-container">
           {city && city.imageUrls && city.imageUrls.length > 0 ? (
             <div className="relative w-full h-full scanlines bg-black">
@@ -95,48 +97,43 @@ const BentoGrid: React.FC<BentoGridProps> = ({ city, user }) => {
           )}
         </div>
 
-        {/* Customs */}
-        <div className="col-span-1 md:col-span-1 bento-card p-6 flex flex-col border-blue-500/10 relative overflow-hidden">
-          <div className="flex items-center justify-between mb-3 shrink-0">
-            <Languages className="w-4 h-4 text-blue-500" />
-            <span className="text-[8px] font-bold text-blue-400 uppercase tracking-widest">Local Tips</span>
+        {/* Local Intel Card - Rows 1-2, Col 4 */}
+        <div className="col-span-1 md:col-span-1 row-span-2 bento-card p-8 flex flex-col border-blue-500/10 relative overflow-hidden group/tips lg:col-start-4">
+          <div className="flex items-center justify-between mb-6 shrink-0">
+            <Languages className="w-5 h-5 text-blue-500" />
+            <span className="text-[10px] font-bold text-blue-400 uppercase tracking-widest">Local Intel</span>
           </div>
-          <div className="flex-1 overflow-y-auto smooth-scroll pr-1">
-            {city && city.intelligence.traditions ? (
-              <p className="text-[11px] text-white/80 font-medium leading-relaxed italic border-l-2 border-blue-500/40 pl-3 py-1">
-                "{city.intelligence.traditions[0]}"
-              </p>
-            ) : (
-              <div className="space-y-2 opacity-5">
-                <div className="h-2 w-full bg-white rounded" />
-              </div>
-            )}
-          </div>
-        </div>
-
-        {/* Places to Visit */}
-        <div className="col-span-1 md:col-span-1 row-span-2 bento-card p-8 flex flex-col border-emerald-500/10 transition-all">
-          <div className="flex items-center justify-between mb-8">
-            <Map className="w-5 h-5 text-emerald-500" />
-            <span className="text-[9px] font-bold text-emerald-400 bg-emerald-400/10 px-3 py-1 rounded-full uppercase tracking-widest border border-emerald-400/20">Spots to Visit</span>
-          </div>
-          <div className="space-y-3 flex-1 smooth-scroll pr-1">
-            {city && city.intelligence.nearbySpots ? (
-              city.intelligence.nearbySpots.map((spot, i) => (
-                <div key={i} className="group/spot p-3 rounded-2xl hover:bg-emerald-500/[0.03] transition-all border border-transparent hover:border-emerald-500/10">
-                  <p className="text-[7px] font-black text-emerald-500/60 uppercase tracking-widest truncate">{spot.type}</p>
-                  <p className="text-[10px] font-bold text-white uppercase tracking-wider truncate">{spot.name}</p>
+          <div className="flex-1 overflow-y-auto smooth-scroll pr-1 space-y-6">
+            {city ? (
+              <>
+                <div className="space-y-2">
+                  <p className="text-[9px] font-black text-blue-500/40 uppercase tracking-[0.2em]">Cultural Salutation</p>
+                  <p className="text-3xl font-semibold text-white tracking-normal group-hover/tips:text-blue-400 transition-colors" style={{ fontFamily: "'Inter', sans-serif" }}>
+                    {city.intelligence.greeting}
+                  </p>
                 </div>
-              ))
+                <div className="border-t border-white/5 pt-5 space-y-4">
+                  <p className="text-[9px] font-black text-white/20 uppercase tracking-[0.2em]">Key Traditions</p>
+                  <div className="space-y-4">
+                    {city.intelligence.traditions.map((trad, idx) => (
+                      <p key={idx} className="text-xs text-white/70 font-medium leading-relaxed italic border-l-2 border-blue-500/20 pl-3">
+                        {trad}
+                      </p>
+                    ))}
+                  </div>
+                </div>
+              </>
             ) : (
-              <div className="h-full flex flex-col justify-center opacity-5 space-y-6">
-                {[1, 2, 3, 4, 5].map(i => <div key={i} className="h-2 w-full bg-white rounded" />)}
+              <div className="space-y-4 opacity-5">
+                <div className="h-6 w-3/4 bg-white rounded" />
+                <div className="h-4 w-full bg-white rounded" />
+                <div className="h-4 w-full bg-white rounded" />
               </div>
             )}
           </div>
         </div>
 
-        {/* Weather */}
+        {/* Weather - Row 3, Col 1 */}
         <div className="bento-card p-8 flex flex-col justify-between border-orange-500/10 group transition-all">
           <div className="flex justify-between items-start">
             <Wind className="text-orange-500/20 w-8 h-8" />
@@ -148,19 +145,19 @@ const BentoGrid: React.FC<BentoGridProps> = ({ city, user }) => {
           </div>
         </div>
 
-        {/* User Profile */}
+        {/* User Profile - Row 3, Col 2 */}
         <div className="bento-card p-8 flex flex-col justify-between border-white/5 transition-all">
           <div className="flex items-center space-x-3">
             <UserCheck className="w-4 h-4 text-blue-500/40" />
             <p className="text-[9px] font-bold text-white/30 uppercase tracking-[0.3em]">Profile</p>
           </div>
           <div className="mt-4 truncate">
-            <p className="text-2xl font-bold font-syne uppercase tracking-tighter text-white">{user?.name}</p>
+            <p className="text-2xl font-bold font-syne uppercase tracking-tighter text-white truncate">{user?.name}</p>
             <p className="text-[9px] text-white/10 font-black uppercase tracking-[0.4em]">{user?.religion}</p>
           </div>
         </div>
 
-        {/* Safety Overview */}
+        {/* Safety Overview - Row 3, Cols 3-4 (adjusts to Col 4 row 3 in md) */}
         <div className="col-span-1 md:col-span-2 bento-card p-8 flex flex-col justify-between border-red-500/10 hover:border-red-500/30 transition-all">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center space-x-3 text-red-500/40">
@@ -172,14 +169,38 @@ const BentoGrid: React.FC<BentoGridProps> = ({ city, user }) => {
           <div className="grid grid-cols-2 gap-4">
             <div className="p-3 bg-white/[0.01] rounded-2xl border border-white/5 flex items-center justify-between">
               <span className="text-[9px] font-bold text-white/30 uppercase tracking-widest">Stability</span>
-              <span className={`text-[11px] font-mono font-black ${(city?.intelligence?.safety?.political || 0) > 80 ? 'text-emerald-400' : 'text-red-400'}`}>
-                {(city?.intelligence?.safety?.political || 0) > 80 ? 'STABLE' : 'WATCH'}
+              <span className={`text-[11px] font-mono font-black ${(city?.intelligence?.safety?.political || 0) > 60 ? 'text-emerald-400' : 'text-red-400'}`}>
+                {(city?.intelligence?.safety?.political || 0) > 60 ? 'STABLE' : 'WATCH'}
               </span>
             </div>
             <div className="p-3 bg-white/[0.01] rounded-2xl border border-white/5 flex items-center justify-between">
-              <span className="text-[9px] font-bold text-white/30 uppercase tracking-widest">Score</span>
+              <span className="text-[9px] font-bold text-white/30 uppercase tracking-widest">Reliability</span>
               <span className="text-[11px] text-emerald-400 font-mono font-black">HIGH</span>
             </div>
+          </div>
+        </div>
+
+        {/* Recommended Stops (5X) - Rows 3-4, Col 4 (Desktop logic) */}
+        {/* We place it here in the DOM to help with natural flow, but grid-placement classes ensure it stays "below" Intel on Col 4. */}
+        <div className="col-span-1 md:col-span-1 row-span-2 bento-card p-8 flex flex-col border-emerald-500/10 transition-all lg:col-start-4 lg:row-start-3">
+          <div className="flex items-center justify-between mb-8 shrink-0">
+            <Map className="w-5 h-5 text-emerald-500" />
+            <span className="text-[9px] font-bold text-emerald-400 bg-emerald-400/10 px-3 py-1 rounded-full uppercase tracking-widest border border-emerald-400/20">Recommended Stops (5X)</span>
+          </div>
+          <div className="space-y-4 flex-1 overflow-y-auto smooth-scroll pr-1">
+            {city && city.intelligence.nearbySpots ? (
+              city.intelligence.nearbySpots.slice(0, 5).map((spot, i) => (
+                <div key={i} className="group/spot p-4 rounded-2xl hover:bg-emerald-500/[0.03] transition-all border border-white/5 hover:border-emerald-500/20">
+                  <p className="text-[7px] font-black text-emerald-500/60 uppercase tracking-widest mb-1">{spot.type}</p>
+                  <p className="text-xs font-bold text-white uppercase tracking-wider mb-1 leading-tight">{spot.name}</p>
+                  <p className="text-[10px] text-white/40 line-clamp-2 leading-relaxed">{spot.description}</p>
+                </div>
+              ))
+            ) : (
+              <div className="h-full flex flex-col justify-center opacity-5 space-y-8">
+                {[1, 2, 3, 4, 5].map(i => <div key={i} className="h-4 w-full bg-white rounded" />)}
+              </div>
+            )}
           </div>
         </div>
       </div>
