@@ -1,20 +1,133 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# 🌍 Sentry Travel Intelligence
 
-# Run and deploy your AI Studio app
+An AI-powered travel dashboard that provides personalized insights about any city using real-time data and intelligent processing.
 
-This contains everything you need to run your app locally.
+---
 
-View your app in AI Studio: https://ai.studio/apps/drive/16SNRI6YfzCTB_SvEgEAaE8RoW4JSdoSI
+## 🚀 Overview
 
-## Run Locally
+Sentry Travel Intelligence is a modern web application that combines multiple APIs and AI to deliver a rich, interactive travel experience. Users can search for any city and receive detailed information including weather, cultural insights, images, and AI-generated recommendations.
 
-**Prerequisites:**  Node.js
+---
 
+## ✨ Features
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+* 🔍 **City Search** – Find any city worldwide
+* 🌦️ **Real-time Weather Data**
+* 📖 **Wikipedia Integration** – Quick city overview
+* 🖼️ **Dynamic Image Fetching**
+* 🤖 **AI-Powered Insights** – Recommendations, warnings, and cultural tips
+* 👤 **User Personalization** – Based on user profile
+* 📊 **Compatibility Score**
+* 🎨 **Modern UI (Bento Grid Layout)**
+
+---
+
+## 🧠 Tech Stack
+
+### Frontend
+
+* React (with TypeScript)
+* Vite
+* Tailwind CSS
+* Lucide Icons
+
+### APIs & Services
+
+* Weather API
+* Wikipedia API
+* Image API (Unsplash/Pexels)
+* AI Integration (for intelligence generation)
+
+### Storage
+
+* LocalStorage (for user profile)
+
+---
+
+## ⚙️ How It Works
+
+1. User completes onboarding (profile setup)
+2. User searches for a city
+3. Application fetches data using multiple APIs:
+
+   * Weather data
+   * Wikipedia summary
+   * City images
+4. AI processes the data and generates:
+
+   * Travel recommendations
+   * Warnings
+   * Cultural insights
+5. Data is displayed in an interactive dashboard
+
+---
+
+## 🧩 Project Structure
+
+```
+components/
+│── About.tsx
+│── BentoGrid.tsx
+│── CommandCenter.tsx
+│── Contact.tsx
+│── IntelBriefing.tsx
+│── IntelDrawer.tsx
+│── Onboarding.tsx
+
+services/
+│── apiService.ts
+
+App.tsx
+index.tsx
+types.ts
+```
+
+---
+
+## 🔥 Key Concepts Used
+
+* Component-based architecture
+* Type safety using TypeScript
+* Async API handling with `async/await`
+* Parallel API calls using `Promise.all`
+* State management using React Hooks (`useState`, `useEffect`)
+
+---
+
+## 📦 Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/your-username/sentry-travel-intelligence.git
+
+# Navigate into project
+cd sentry-travel-intelligence
+
+# Install dependencies
+npm install
+
+# Run the app
+npm run dev
+```
+
+---
+
+## 🌐 Future Improvements
+
+* 🌍 Map integration (Google Maps)
+* 💬 AI chat assistant for travel queries
+* ❤️ Save favorite destinations
+* ☁️ Backend integration for persistent storage
+
+---
+
+## 👨‍💻 Author
+
+**Rajat Mishra**
+
+---
+
+## 📄 License
+
+This project is for educational purposes.
